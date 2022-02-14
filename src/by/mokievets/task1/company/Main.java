@@ -1,53 +1,39 @@
 package by.mokievets.task1.company;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
 
 import static by.mokievets.task1.company.AllTasks.*;
-
 
 public class Main {
 
     public static void main(String[] args) {
+        Input input = new Input();
+        Output output = new Output();
         //Task Three
-        System.out.println("Please enter your numbers for task 3:");
-        Scanner scan = new Scanner(System.in);
-        Double a = scan.nextDouble();
-        Double b = scan.nextDouble();
+        output.writeThirdCondition();
+        Double a = input.enterPositiveDouble();
+        Double b = input.enterPositiveDouble();
         ArrayList<Double> params = doTaskThree(a, b);
-        System.out.println("Perimeter is " + params.get(0) + ", square is " + params.get(1));
-        //Task Four
-        System.out.println("Please enter x and y of your point:");
-        double x = scan.nextDouble();
-        double y = scan.nextDouble();
-        System.out.println("The statement that your point is in the chosen area is " + doTaskFour(x, y));
+        output.writeThirdAnswer(params);
         //Task Nine
-        System.out.println("Please enter the length of your first array:");
-        int l1 = scan.nextInt();
+        output.writeLength("first");
+        int l1 = input.enterPositiveInt();
         int[] nums1 = new int[l1];
-        System.out.println("Please enter the elements of your first array:");
-        for (int i = 0; i < l1; ++i) {
-            nums1[i] = scan.nextInt();
-        }
-        System.out.println("Please enter the length of your second array:");
-        int l2 = scan.nextInt();
+        output.writeElements("first");
+        nums1 = input.enterArray(nums1);
+        output.writeLength("second");
+        int l2 = input.enterPositiveInt();
         int[] nums2 = new int[l2];
-        System.out.println("Please enter the elements of your second array:");
-        for (int i = 0; i < l2; ++i) {
-            nums2[i] = scan.nextInt();
-        }
-        System.out.println("Please enter the index of the first array, " +
-                "after which you would like to insert the second array");
-        int k = scan.nextInt();
-        int[] all_nums = doTaskNine(nums1, nums2, k);
-        System.out.println("The new array is " + Arrays.toString(all_nums));
+        output.writeElements("second");
+        nums2 = input.enterArray(nums2);
+        output.writeIndex();
+        int k = input.enterIntWithinRange(l1);
+        int[] nums = doTaskNine(nums1, nums2, k);
+        output.writeArray(nums);
         //Task Ten
-        System.out.println("Please enter the size of your matrix:");
-        int n = scan.nextInt();
+        output.writeInt();
+        int n = input.enterPositiveInt();
         int[][] matrix = doTaskTen(n);
-        for (int i = 0; i < n; ++i) {
-            System.out.println(Arrays.toString(matrix[i]));
-        }
+        output.writeMatrix(matrix, n);
     }
 }
